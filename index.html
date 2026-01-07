@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arcadian Advertising — Strategy Is the Advantage</title>
+  <meta name="description" content="Arcadian Advertising is a strategy-led performance agency. We protect capital, engineer leverage, and scale what works." />
+  <style>
+    :root{
+      --bg:#0F1115;         /* Obsidian Black */
+      --fg:#F3F4F6;         /* Near-white */
+      --muted:#B7BCC5;      /* Light gray */
+      --subtle:#6E7278;     /* Stone Gray */
+      --gold:#C9A24D;       /* Arcadian Gold */
+      --card:#141823;       /* Slightly lighter than bg */
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1040px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(201,162,77,.12), transparent 55%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(30,58,47,.16), transparent 55%),
+                  var(--bg);
+      color:var(--fg);
+      font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      letter-spacing:.2px;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+    header{
+      position:sticky; top:0; z-index:10;
+      background: linear-gradient(to bottom, rgba(15,17,21,.85), rgba(15,17,21,.65));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 0;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .mark{
+      width:34px; height:34px; border-radius:12px;
+      border:1px solid rgba(201,162,77,.45);
+      background:
+        radial-gradient(12px 12px at 30% 30%, rgba(201,162,77,.45), transparent 70%),
+        linear-gradient(180deg, rgba(201,162,77,.22), rgba(201,162,77,.04));
+      box-shadow: 0 10px 18px rgba(0,0,0,.25);
+    }
+    .brand span{
+      font-weight:650;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      font-size:13px;
+      color:rgba(243,244,246,.92);
+    }
+    .navlinks{
+      display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+      color:rgba(243,244,246,.82);
+      font-size:14px;
+    }
+    .navlinks a{
+      text-decoration:none;
+      opacity:.9;
+    }
+    .navlinks a:hover{opacity:1; color:var(--fg)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      border:1px solid rgba(201,162,77,.55);
+      background: linear-gradient(180deg, rgba(201,162,77,.22), rgba(201,162,77,.08));
+      color:var(--fg);
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
+      font-weight:600;
+    }
+    .btn:hover{
+      border-color:rgba(201,162,77,.8);
+      background: linear-gradient(180deg, rgba(201,162,77,.28), rgba(201,162,77,.10));
+    }
+    .btn.secondary{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      box-shadow:none;
+      font-weight:600;
+    }
+    .btn.secondary:hover{
+      border-color:rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+    }
+
+    main{padding:54px 0 72px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:28px;
+      align-items:stretch;
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size:44px;
+      line-height:1.08;
+      letter-spacing:-.8px;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-weight:650;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+      color:rgba(243,244,246,.75);
+      font-size:13px;
+      margin-bottom:14px;
+    }
+    .dot{
+      width:7px; height:7px; border-radius:99px;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(201,162,77,.12);
+    }
+    .lead{
+      margin:0 0 18px;
+      font-size:18px;
+      color:rgba(243,244,246,.86);
+      max-width:58ch;
+    }
+    .sublead{
+      margin:0 0 22px;
+      color:var(--muted);
+      max-width:62ch;
+    }
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap}
+    .panel{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .panel:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(500px 220px at 10% 0%, rgba(201,162,77,.14), transparent 55%),
+                  radial-gradient(520px 240px at 90% 10%, rgba(30,58,47,.18), transparent 55%);
+      pointer-events:none;
+    }
+    .panel > *{position:relative}
+    .panel h3{margin:0 0 10px; font-size:16px; letter-spacing:.3px}
+    .panel p{margin:0; color:var(--muted)}
+    .stats{
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:14px; margin-top:16px;
+    }
+    .stat{
+      border:1px solid var(--border);
+      background: rgba(15,17,21,.55);
+      border-radius: 14px;
+      padding:14px;
+    }
+    .stat b{display:block; font-size:18px; margin-bottom:2px; color:rgba(243,244,246,.9)}
+    .stat span{color:rgba(183,188,197,.9); font-size:13px}
+
+    section{margin-top:28px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+    }
+    .card{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      padding:22px;
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.3px;
+    }
+    .card p{margin:0; color:var(--muted)}
+    .list{
+      margin:14px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .list li{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(15,17,21,.35);
+      color:rgba(243,244,246,.86);
+    }
+    .rule{
+      border:0; height:1px; background: var(--border);
+      margin:26px 0;
+    }
+
+    .method{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    .step{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      padding:18px;
+      min-height:140px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      color:rgba(243,244,246,.78);
+      margin-bottom:10px;
+    }
+    .badge i{
+      width:22px; height:22px; border-radius:8px;
+      display:inline-flex; align-items:center; justify-content:center;
+      border:1px solid rgba(201,162,77,.38);
+      color:var(--gold);
+      font-style:normal;
+      font-weight:700;
+      background: rgba(201,162,77,.08);
+    }
+    .step h3{margin:0 0 8px; font-size:16px}
+    .step p{margin:0; color:var(--muted); font-size:14px}
+
+    .cta{
+      margin-top:28px;
+      padding:26px;
+      border-radius: calc(var(--radius) + 6px);
+      border:1px solid rgba(201,162,77,.28);
+      background: radial-gradient(900px 340px at 20% 0%, rgba(201,162,77,.16), transparent 55%),
+                  rgba(255,255,255,.02);
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .cta h2{margin:0; font-size:22px}
+    .cta p{margin:6px 0 0; color:var(--muted); max-width:70ch}
+
+    footer{
+      padding:34px 0 38px;
+      border-top:1px solid var(--border);
+      color:rgba(183,188,197,.9);
+      font-size:13px;
+    }
+
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr}
+      .method{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 520px){
+      .hero h1{font-size:36px}
+      .method{grid-template-columns:1fr}
+      .navlinks{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Arcadian Advertising Home">
+          <div class="mark" aria-hidden="true"></div>
+          <span>Arcadian Advertising</span>
+        </a>
+        <nav class="navlinks" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#method">Method</a>
+          <a href="#proof">Your Ad Here</a>
+          <a href="#fit">Fit</a>
+        </nav>
+        <a class="btn" href="#contact">Work With Arcadian</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+
+      <!-- HERO -->
+      <section class="hero" aria-label="Hero">
+        <div>
+          <div class="kicker"><span class="dot" aria-hidden="true"></span>Strategy-led performance agency</div>
+          <h1>Strategy Is the Advantage</h1>
+          <p class="lead">
+            We build disciplined advertising systems for brands that compete in real markets — where attention is expensive and mistakes cost money.
+          </p>
+          <p class="sublead">
+            Arcadian Advertising is a strategy-led performance agency. We protect capital, engineer leverage, and scale what works.
+          </p>
+          <div class="ctaRow">
+            <a class="btn" href="#contact">Work With Arcadian</a>
+            <a class="btn secondary" href="#proof">See the Proof Engine</a>
+          </div>
+        </div>
+
+        <aside class="panel" aria-label="Agency Summary">
+          <h3>Advertising Without Guesswork</h3>
+          <p>Systems-first execution built to withstand volatility, competition, and scale.</p>
+          <div class="stats" aria-label="Highlights">
+            <div class="stat">
+              <b>Strategy</b>
+              <span>Before spend</span>
+            </div>
+            <div class="stat">
+              <b>Structure</b>
+              <span>Before scale</span>
+            </div>
+            <div class="stat">
+              <b>Leverage</b>
+              <span>Before volume</span>
+            </div>
+            <div class="stat">
+              <b>Discipline</b>
+              <span>Always</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <hr class="rule" />
+
+      <!-- SERVICES -->
+      <section id="services" class="grid" aria-label="Services">
+        <div class="card">
+          <h2>Advertising Without Guesswork</h2>
+          <p>
+            Most advertising fails because it’s reactive — chasing trends, copying competitors, or scaling before structure.
+            We do the opposite. Arcadian designs systems-first advertising that makes performance repeatable, measurable, and defensible.
+          </p>
+          <ul class="list">
+            <li>Paid media strategy &amp; execution</li>
+            <li>Offer and funnel engineering</li>
+            <li>Creative testing frameworks</li>
+            <li>Performance diagnostics &amp; optimization</li>
+          </ul>
+          <p style="margin-top:14px;color:rgba(243,244,246,.84);">
+            Every decision is deliberate. Every dollar has a job.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Systems Beat Tactics</h2>
+          <p>
+            Tactics are temporary. Systems compound. We work from first principles to build advertising engines that can withstand
+            volatility, competition, and scale.
+          </p>
+          <ul class="list">
+            <li>Strategy before spend</li>
+            <li>Structure before scale</li>
+            <li>Leverage before volume</li>
+          </ul>
+          <p style="margin-top:14px;color:rgba(243,244,246,.84);">
+            Growth isn’t magic. It’s architecture.
+          </p>
+        </div>
+      </section>
+
+      <hr class="rule" />
+
+      <!-- METHOD -->
+      <section id="method" aria-label="The Arcadian Method">
+        <div class="card" style="padding:22px;">
+          <h2>The Arcadian Method</h2>
+          <p>
+            Arcadian operates through a disciplined four-phase system designed to turn spend into leverage.
+          </p>
+
+          <div class="method">
+            <div class="step">
+              <div class="badge"><i>1</i> Diagnose</div>
+              <h3>Find leverage &amp; risk</h3>
+              <p>Analyze market, offer, funnel, and performance to identify what’s blocking growth — and what can be exploited.</p>
+            </div>
+            <div class="step">
+              <div class="badge"><i>2</i> Design</div>
+              <h3>Architect the system</h3>
+              <p>Define channels, messaging angles, creative frameworks, and testing plans with clear success criteria.</p>
+            </div>
+            <div class="step">
+              <div class="badge"><i>3</i> Deploy</div>
+              <h3>Execute with discipline</h3>
+              <p>Launch structured tests with controlled aggression, keeping signal clean and decisions fast.</p>
+            </div>
+            <div class="step">
+              <div class="badge"><i>4</i> Dominate</div>
+              <h3>Scale what works</h3>
+              <p>Expand winners, eliminate waste, and continuously optimize toward durable, defensible growth.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="rule" />
+
+      <!-- PROOF ENGINE -->
+      <section id="proof" aria-label="Built in Public">
+        <div class="card">
+          <h2>Built in Public</h2>
+          <p>
+            <strong>Your Ad Here</strong> is our proving ground — a live-fire growth challenge developed by Arcadian Advertising
+            to test strategies, creatives, and offers in real markets, publicly.
+          </p>
+          <p style="margin-top:12px;color:rgba(243,244,246,.84);">
+            No theory. No hiding. Every system we deploy for clients is first pressure-tested in the wild.
+          </p>
+          <div class="ctaRow" style="margin-top:16px;">
+            <a class="btn secondary" href="#contact">Ask About Your Ad Here</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FIT -->
+      <section id="fit" aria-label="Who We Work With">
+        <div class="card">
+          <h2>Who We Work With</h2>
+          <p>Arcadian partners with:</p>
+          <ul class="list">
+            <li>Founder-led brands ready to scale</li>
+            <li>Operators who value discipline over hype</li>
+            <li>Teams tired of guessing with their ad spend</li>
+          </ul>
+          <p style="margin-top:12px;color:rgba(243,244,246,.84);">
+            If you’re looking for shortcuts, we’re not a fit. If you’re building something real, we should talk.
+          </p>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section id="contact" class="cta" aria-label="Start a Conversation">
+        <div>
+          <h2>Start a Conversation</h2>
+          <p>If your advertising feels random, expensive, or inconsistent — there’s a system missing. We build those.</p>
+        </div>
+        <div class="ctaRow">
+          <a class="btn" href="mailto:hello@arcadianadvertising.com">Start a Conversation</a>
+          <a class="btn secondary" href="#top">Back to Top</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="y"></span> Arcadian Advertising. Strategy-led. Performance-driven.
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
