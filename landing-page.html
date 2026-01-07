@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Ad Here — A Live-Fire Growth Challenge</title>
+  <meta name="description" content="Your Ad Here is Arcadian Advertising’s public proving ground — real ads, real budgets, real outcomes." />
+  <style>
+    :root{
+      --bg:#0F1115;         /* Obsidian Black */
+      --fg:#F3F4F6;         /* Near-white */
+      --muted:#B7BCC5;      /* Light gray */
+      --subtle:#6E7278;     /* Stone Gray */
+      --gold:#C9A24D;       /* Arcadian Gold */
+      --green:#1E3A2F;      /* Deep Forest Green */
+      --card:#141823;
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1040px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 420px at 15% -10%, rgba(201,162,77,.16), transparent 55%),
+        radial-gradient(950px 460px at 95% 5%, rgba(30,58,47,.22), transparent 55%),
+        radial-gradient(800px 380px at 60% 110%, rgba(201,162,77,.10), transparent 55%),
+        var(--bg);
+      color:var(--fg);
+      font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      letter-spacing:.2px;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+    header{
+      position:sticky; top:0; z-index:10;
+      background: linear-gradient(to bottom, rgba(15,17,21,.85), rgba(15,17,21,.65));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 0; gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      min-width: 220px;
+    }
+    .mark{
+      width:34px; height:34px; border-radius:12px;
+      border:1px solid rgba(201,162,77,.45);
+      background:
+        radial-gradient(12px 12px at 30% 30%, rgba(201,162,77,.45), transparent 70%),
+        linear-gradient(180deg, rgba(201,162,77,.22), rgba(201,162,77,.04));
+      box-shadow: 0 10px 18px rgba(0,0,0,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    /* little “test pattern” detail to feel more experimental */
+    .mark:after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(201,162,77,.00) 0px,
+        rgba(201,162,77,.00) 8px,
+        rgba(201,162,77,.14) 8px,
+        rgba(201,162,77,.14) 9px
+      );
+      opacity:.25;
+      pointer-events:none;
+    }
+    .brand span{
+      font-weight:650;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      font-size:13px;
+      color:rgba(243,244,246,.92);
+    }
+    .navlinks{
+      display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+      color:rgba(243,244,246,.82);
+      font-size:14px;
+    }
+    .navlinks a{text-decoration:none; opacity:.9}
+    .navlinks a:hover{opacity:1; color:var(--fg)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      border:1px solid rgba(201,162,77,.55);
+      background: linear-gradient(180deg, rgba(201,162,77,.22), rgba(201,162,77,.08));
+      color:var(--fg);
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
+      font-weight:650;
+    }
+    .btn:hover{
+      border-color:rgba(201,162,77,.8);
+      background: linear-gradient(180deg, rgba(201,162,77,.28), rgba(201,162,77,.10));
+    }
+    .btn.secondary{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      box-shadow:none;
+      font-weight:650;
+    }
+    .btn.secondary:hover{
+      border-color:rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+    }
+
+    main{padding:54px 0 72px}
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+      color:rgba(243,244,246,.75);
+      font-size:13px;
+      margin-bottom:14px;
+    }
+    .dot{
+      width:7px; height:7px; border-radius:99px;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(201,162,77,.12);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:44px;
+      line-height:1.06;
+      letter-spacing:-.8px;
+    }
+    .lead{
+      margin:0 0 12px;
+      font-size:18px;
+      color:rgba(243,244,246,.88);
+      max-width:60ch;
+    }
+    .sublead{
+      margin:0 0 20px;
+      color:var(--muted);
+      max-width:64ch;
+    }
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap}
+
+    .panel{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .panel:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(520px 220px at 10% 0%, rgba(201,162,77,.14), transparent 55%),
+        radial-gradient(520px 240px at 90% 10%, rgba(30,58,47,.20), transparent 55%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .panel > *{position:relative}
+    .panel h3{margin:0 0 10px; font-size:16px; letter-spacing:.3px}
+    .panel p{margin:0; color:var(--muted)}
+    .bullets{
+      margin:14px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .bullets li{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(15,17,21,.55);
+      color:rgba(243,244,246,.86);
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .check{
+      width:18px; height:18px; border-radius:6px;
+      border:1px solid rgba(201,162,77,.40);
+      background: rgba(201,162,77,.08);
+      display:inline-flex;
+      align-items:center; justify-content:center;
+      color:var(--gold);
+      font-weight:900;
+      flex:0 0 auto;
+      margin-top:2px;
+    }
+
+    .rule{border:0; height:1px; background: var(--border); margin:26px 0}
+
+    section{margin-top:18px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+    }
+    .card{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      padding:22px;
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.3px;
+    }
+    .card p{margin:0; color:var(--muted)}
+    .list{
+      margin:14px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .list li{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(15,17,21,.35);
+      color:rgba(243,244,246,.86);
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+    .step{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      padding:16px;
+      min-height:130px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      color:rgba(243,244,246,.78);
+      margin-bottom:10px;
+    }
+    .badge i{
+      width:22px; height:22px; border-radius:8px;
+      display:inline-flex; align-items:center; justify-content:center;
+      border:1px solid rgba(201,162,77,.38);
+      color:var(--gold);
+      font-style:normal;
+      font-weight:800;
+      background: rgba(201,162,77,.08);
+    }
+    .step h3{margin:0 0 8px; font-size:15px}
+    .step p{margin:0; color:var(--muted); font-size:14px}
+
+    .cta{
+      margin-top:22px;
+      padding:26px;
+      border-radius: calc(var(--radius) + 6px);
+      border:1px solid rgba(201,162,77,.28);
+      background:
+        radial-gradient(900px 340px at 20% 0%, rgba(201,162,77,.16), transparent 55%),
+        radial-gradient(700px 260px at 90% 30%, rgba(30,58,47,.20), transparent 55%),
+        rgba(255,255,255,.02);
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .cta h2{margin:0; font-size:22px}
+    .cta p{margin:6px 0 0; color:var(--muted); max-width:72ch}
+
+    details{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      padding:14px 16px;
+    }
+    details + details{margin-top:10px}
+    summary{
+      cursor:pointer;
+      font-weight:650;
+      color:rgba(243,244,246,.90);
+      outline:none;
+    }
+    details p{margin:10px 0 0; color:var(--muted)}
+
+    footer{
+      padding:34px 0 38px;
+      border-top:1px solid var(--border);
+      color:rgba(183,188,197,.9);
+      font-size:13px;
+    }
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 520px){
+      h1{font-size:36px}
+      .navlinks{display:none}
+      .steps{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Your Ad Here Home">
+          <div class="mark" aria-hidden="true"></div>
+          <span>Your Ad Here</span>
+        </a>
+        <nav class="navlinks" aria-label="Primary">
+          <a href="#what">What</a>
+          <a href="#why">Why</a>
+          <a href="#get">What You Get</a>
+          <a href="#how">How</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="btn" href="#apply">Apply</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+
+      <!-- HERO -->
+      <section class="hero" aria-label="Hero">
+        <div>
+          <div class="kicker"><span class="dot" aria-hidden="true"></span>A live-fire growth challenge</div>
+          <h1>Real ads. Real budgets. Real outcomes.</h1>
+          <p class="lead">
+            Your Ad Here is Arcadian Advertising’s public proving ground — where we pressure-test strategies, offers, and creative systems in the wild.
+          </p>
+          <p class="sublead">
+            We select a participant, run disciplined tests, and publish what happens — wins, losses, and learnings. No theory. No hiding.
+          </p>
+          <div class="ctaRow">
+            <a class="btn" href="#apply">Apply to Participate</a>
+            <a class="btn secondary" href="#follow">Follow the Challenge</a>
+          </div>
+        </div>
+
+        <aside class="panel" aria-label="Quick Summary">
+          <h3>What to expect</h3>
+          <p>Structured testing, fast iteration, and a public breakdown with receipts.</p>
+          <ul class="bullets" aria-label="Highlights">
+            <li><span class="check">✓</span><span>Offer + funnel review (or build)</span></li>
+            <li><span class="check">✓</span><span>Messaging angles + creative direction</span></li>
+            <li><span class="check">✓</span><span>Campaign build + launch</span></li>
+            <li><span class="check">✓</span><span>Public case study after completion</span></li>
+          </ul>
+        </aside>
+      </section>
+
+      <hr class="rule" />
+
+      <!-- WHAT -->
+      <section id="what" class="grid" aria-label="What It Is">
+        <div class="card">
+          <h2>What It Is</h2>
+          <p>
+            Your Ad Here is a structured advertising experiment.
+            We select a brand (or build an offer from scratch), run disciplined tests across paid channels,
+            and publish the results — including what didn’t work.
+          </p>
+          <p style="margin-top:12px;color:rgba(243,244,246,.84);">
+            No theory. No hiding.
+          </p>
+        </div>
+        <div class="card" id="why">
+          <h2>Why We Built It</h2>
+          <p>
+            Most advertising advice is either too vague to execute or too polished to trust.
+            Your Ad Here exists to prove what actually works — under constraints, in public, with receipts.
+          </p>
+        </div>
+      </section>
+
+      <hr class="rule" />
+
+      <!-- GET -->
+      <section id="get" aria-label="What You Get">
+        <div class="card">
+          <h2>What You Get If You’re Selected</h2>
+          <p><strong>A real performance sprint</strong> led by Arcadian Advertising.</p>
+
+          <div class="grid" style="margin-top:14px; gap:14px;">
+            <div class="card" style="padding:18px;">
+              <h3 style="margin:0 0 8px;font-size:16px;">Included</h3>
+              <ul class="list">
+                <li>Offer + funnel review (or build)</li>
+                <li>Messaging angles + creative direction</li>
+                <li>Structured testing plan</li>
+                <li>Campaign build + launch</li>
+                <li>Live iteration for the duration</li>
+                <li>Public case study after completion</li>
+              </ul>
+            </div>
+            <div class="card" style="padding:18px;">
+              <h3 style="margin:0 0 8px;font-size:16px;">You bring</h3>
+              <ul class="list">
+                <li>A real product/service</li>
+                <li>The willingness to move fast</li>
+                <li>Budget you can afford to deploy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FIT -->
+      <section aria-label="Who This Is For">
+        <div class="card">
+          <h2>Who This Is For</h2>
+          <div class="grid" style="margin-top:12px;">
+            <div class="card" style="padding:18px;">
+              <h3 style="margin:0 0 8px;font-size:16px;">You’re a fit if</h3>
+              <ul class="list">
+                <li>You sell something real</li>
+                <li>You want signal, not guesses</li>
+                <li>You can execute quickly</li>
+                <li>You’re willing to learn in public</li>
+              </ul>
+            </div>
+            <div class="card" style="padding:18px;">
+              <h3 style="margin:0 0 8px;font-size:16px;">Not a fit if</h3>
+              <ul class="list">
+                <li>You want shortcuts</li>
+                <li>You need guarantees before testing</li>
+                <li>You’re allergic to transparency</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="rule" />
+
+      <!-- HOW -->
+      <section id="how" aria-label="How It Works">
+        <div class="card">
+          <h2>How It Works</h2>
+          <p>Simple structure. Fast movement. Clear success criteria.</p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="badge"><i>1</i> Apply</div>
+              <h3>Tell us the basics</h3>
+              <p>What you sell, who it’s for, what you’ve tried, and where you’re stuck.</p>
+            </div>
+            <div class="step">
+              <div class="badge"><i>2</i> Selection</div>
+              <h3>We choose the fit</h3>
+              <p>Based on clarity, readiness, and challenge alignment.</p>
+            </div>
+            <div class="step">
+              <div class="badge"><i>3</i> Build</div>
+              <h3>Prepare the system</h3>
+              <p>Tighten the offer, align funnel flow, and prep testing assets.</p>
+            </div>
+            <div class="step">
+              <div class="badge"><i>4</i> Launch</div>
+              <h3>Run structured tests</h3>
+              <p>Disciplined experiments with clean signal and defined outcomes.</p>
+            </div>
+            <div class="step">
+              <div class="badge"><i>5</i> Publish</div>
+              <h3>Share the breakdown</h3>
+              <p>Results, learnings, and the full post-mortem — including what failed.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUBLIC -->
+      <section aria-label="What Public Means">
+        <div class="card">
+          <h2>What “Public” Means</h2>
+          <p>We don’t reveal sensitive customer data.</p>
+          <ul class="list">
+            <li>The strategy</li>
+            <li>The creative frameworks</li>
+            <li>What we tested</li>
+            <li>What it cost</li>
+            <li>What worked (and what didn’t)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- APPLY CTA -->
+      <section id="apply" class="cta" aria-label="Apply">
+        <div>
+          <h2>Apply</h2>
+          <p>If your ads feel random, expensive, or inconsistent — you’re exactly who this is for.</p>
+        </div>
+        <div class="ctaRow">
+          <!-- Swap these links to your real form + social -->
+          <a class="btn" href="https://example.com/apply" target="_blank" rel="noopener">Apply to Participate</a>
+          <a class="btn secondary" id="follow" href="https://example.com/follow" target="_blank" rel="noopener">Follow the Challenge</a>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section aria-label="About Arcadian">
+        <div class="card">
+          <h2>About Arcadian</h2>
+          <p>
+            Your Ad Here is developed and operated by <strong>Arcadian Advertising</strong> — a strategy-led performance agency built to protect capital and engineer leverage.
+          </p>
+          <ul class="list" style="margin-top:12px;">
+            <li>Strategy before spend</li>
+            <li>Structure before scale</li>
+            <li>Leverage before volume</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" aria-label="FAQs">
+        <div class="card">
+          <h2>FAQs</h2>
+
+          <details>
+            <summary>How long is the challenge?</summary>
+            <p>Typically 2–4 weeks depending on the offer and market.</p>
+          </details>
+
+          <details>
+            <summary>What channels do you run?</summary>
+            <p>Where it makes sense — usually Meta, Google, or YouTube. Sometimes others.</p>
+          </details>
+
+          <details>
+            <summary>Do I pay Arcadian?</summary>
+            <p>Participation terms vary. If selected, we’ll outline the structure clearly.</p>
+          </details>
+
+          <details>
+            <summary>What budget do I need?</summary>
+            <p>Enough to generate signal. We’ll recommend a range based on your offer.</p>
+          </details>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="y"></span> Your Ad Here. A project by Arcadian Advertising.
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
