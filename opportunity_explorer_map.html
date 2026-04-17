@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opportunity Explorer Map</title>
+  <meta name="description" content="A guided hub for exploring the Opportunity Explorer Canva site." />
+  <style>
+    :root{--bg:#0a0a0a;--panel:#111;--text:#f5f5f5;--muted:#b3b3b3;--line:rgba(255,255,255,.10);--accent:#6ee7b7;--max:1200px;--shadow:0 20px 60px rgba(0,0,0,.35)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left, rgba(99,102,241,.18), transparent 35%),radial-gradient(circle at 80% 20%, rgba(16,185,129,.12), transparent 30%),linear-gradient(to bottom, rgba(255,255,255,.02), rgba(255,255,255,0)),var(--bg);color:var(--text);line-height:1.5}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+    .hero{padding:88px 0 72px;border-bottom:1px solid var(--line)}
+    .pill{display:inline-flex;align-items:center;border:1px solid rgba(110,231,183,.28);color:var(--accent);background:rgba(110,231,183,.08);border-radius:999px;padding:8px 12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+    h1,h2,h3,h4,p{margin:0}
+    h1{margin-top:18px;font-size:clamp(42px,7vw,82px);line-height:.94;letter-spacing:-.04em;max-width:920px}
+    .lead{margin-top:24px;color:var(--muted);font-size:clamp(18px,2.2vw,22px);line-height:1.7;max-width:760px}
+    .actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:18px;font-weight:700;transition:transform .18s ease, background .18s ease, border-color .18s ease;border:1px solid transparent}
+    .btn:hover{transform:translateY(-1px)} .btn-primary{background:#fff;color:#111} .btn-secondary{background:rgba(255,255,255,.04);border-color:var(--line);color:#fff}
+    section.block{padding:72px 0}
+    .eyebrow{color:#9a9a9a;text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:700}
+    h2{margin-top:12px;font-size:clamp(30px,4.4vw,58px);line-height:1.02;letter-spacing:-.04em;max-width:860px}
+    .stack{display:flex;flex-direction:column;gap:24px}
+    .group{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:32px;padding:28px;box-shadow:var(--shadow)}
+    .group p.desc{margin-top:10px;color:var(--muted);font-size:16px;line-height:1.8;max-width:720px}
+    .cards,.library,.route-grid{display:grid;gap:16px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:22px}
+    .library{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px}
+    .route-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .card{border:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border-radius:28px;padding:20px;transition:transform .18s ease,border-color .18s ease,background .18s ease;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
+    .card:hover{transform:translateY(-3px);border-color:rgba(110,231,183,.38);background:rgba(255,255,255,.05)}
+    .meta{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .page-no{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--accent)}
+    .tag{border:1px solid var(--line);color:#bdbdbd;border-radius:999px;padding:6px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.14em}
+    .card h4{margin-top:18px;font-size:28px;line-height:1.08;letter-spacing:-.03em}
+    .card p,.route p,.cta p{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.8}
+    .open{margin-top:18px;font-size:14px;font-weight:700;color:#f0f0f0}
+    .route{border:1px solid var(--line);border-radius:28px;padding:22px;background:rgba(0,0,0,.24)}
+    .route .eyebrow{color:var(--accent)} .route h3{margin-top:10px;font-size:28px;line-height:1.08;letter-spacing:-.03em}
+    .cta{border:1px solid rgba(110,231,183,.2);background:linear-gradient(135deg, rgba(110,231,183,.12), rgba(255,255,255,.04), rgba(129,140,248,.12));border-radius:32px;padding:30px;box-shadow:var(--shadow);display:grid;gap:28px;grid-template-columns:1.15fr .85fr;align-items:center}
+    .cta-box{border:1px solid var(--line);background:rgba(0,0,0,.22);border-radius:28px;padding:18px;display:grid;gap:10px}
+    .small{font-size:13px;color:#bdbdbd;text-align:center;padding-top:4px}
+    @media (max-width:900px){.cta{grid-template-columns:1fr}}
+    @media (max-width:640px){.wrap{padding:0 18px}.hero{padding:64px 0 54px}section.block{padding:56px 0}.group{padding:20px}.card{border-radius:24px;min-height:auto}.card h4{font-size:24px}.route h3{font-size:24px}.cta{padding:22px;border-radius:26px}}
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="wrap">
+      <div class="pill">Opportunity Explorer map</div>
+      <h1>Don’t just browse.<br />Choose your entry point.</h1>
+      <p class="lead">This guide turns the 40-page Canva experience into a more intuitive map. Each destination has a reason to visit, depending on whether you want the overview, the framework, the critique, or the deeper philosophy.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#guided">Follow the guided path</a>
+        <a class="btn btn-secondary" href="#all-pages">Browse all 40 pages</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="guided" class="block">
+    <div class="wrap">
+      <div class="eyebrow">Guided routes</div>
+      <h2>Pick the path that matches what you want to understand.</h2>
+      <div class="stack" id="groupContainer"></div>
+    </div>
+  </section>
+
+  <section class="block" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.02);">
+    <div class="wrap"><div class="route-grid" id="routeContainer"></div></div>
+  </section>
+
+  <section id="all-pages" class="block">
+    <div class="wrap">
+      <div class="eyebrow">Full page library</div>
+      <h2>All 40 pages, with a reason to click each one.</h2>
+      <div class="library" id="libraryContainer"></div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0;">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <div class="eyebrow" style="color:var(--accent)">Final touch</div>
+          <h2 style="font-size:clamp(30px,4vw,56px)">Turn a maze of pages into a guided experience.</h2>
+          <p>Instead of forcing every visitor through the same linear flow, this page gives them intuitive starting points and a reason to keep exploring. It makes the whole project feel more intentional.</p>
+        </div>
+        <div class="cta-box">
+          <a class="btn btn-primary" id="openMain" href="#" target="_blank" rel="noreferrer">Open main Canva site</a>
+          <a class="btn btn-secondary" href="#all-pages">Browse all page links</a>
+          <div class="small">Ready to host as a standalone page.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const base = 'https://eventtemp.my.canva.site/opportunity-explorer';
+    const pages = [
+      { n: 1, title: 'Start Here', teaser: 'A fast overview of the core idea: focus on value, not noise.', tag: 'Overview' },
+      { n: 2, title: 'Step Away from Noise', teaser: 'Why trends, metrics, and platform pressure can pull you away from meaningful work.', tag: 'Mindset Shift' },
+      { n: 3, title: 'The Pattern', teaser: 'A closer look at why software often pushes creators toward output instead of value.', tag: 'Pattern' },
+      { n: 4, title: 'The Output Trap', teaser: 'See how quantity-first tools create activity without clarity.', tag: 'Problem' },
+      { n: 5, title: 'Value First, Creation Second', teaser: 'A cleaner mental model for making better creative decisions upstream.', tag: 'Framework' },
+      { n: 6, title: 'Three Pillars', teaser: 'Audience needs, unique insights, and clear goals as the foundation for better choices.', tag: 'Framework' },
+      { n: 7, title: 'The New Creator Imperative', teaser: 'Why judgment matters more now that execution is cheap and abundant.', tag: 'Thesis' },
+      { n: 8, title: 'Value-Driven Examples', teaser: 'Concrete examples of how value-first thinking changes the work you choose to pursue.', tag: 'Examples' },
+      { n: 9, title: 'Create Value, Not Just Content', teaser: 'A sharper case for strategic thinking before production begins.', tag: 'Strategy' },
+      { n: 10, title: 'Stop Creating, Start Deciding', teaser: 'A page focused on evaluating opportunities before committing your effort.', tag: 'Decision-Making' },
+      { n: 11, title: 'Reframe Your Creative Journey', teaser: 'What changes when you prioritize direction over sheer production.', tag: 'Mindset Shift' },
+      { n: 12, title: 'From Idea to Impact', teaser: 'A value-first sequence for identifying, exploring, and choosing better projects.', tag: 'Process' },
+      { n: 13, title: 'Discover the Unseen Potential', teaser: 'A more aspirational page about clarity, informed choices, and creative confidence.', tag: 'Vision' },
+      { n: 14, title: 'Better Creative Decisions', teaser: 'Highlights the tools and thinking patterns that support stronger judgment.', tag: 'Tools' },
+      { n: 15, title: 'Creating Value Before Creation', teaser: 'A deeper explanation of why the groundwork matters more than people think.', tag: 'Thesis' },
+      { n: 16, title: 'Tools Focused on Output Over Value', teaser: 'An explicit critique of creator tools that reward quantity over outcomes.', tag: 'Critique' },
+      { n: 17, title: 'The Primacy of Good Decisions', teaser: 'A page about narrowing your attention to the opportunities that truly deserve it.', tag: 'Decision-Making' },
+      { n: 18, title: 'Value-First Decisions', teaser: 'Questions, prompts, and structure for choosing intentionally.', tag: 'Prompts' },
+      { n: 19, title: 'A Value-First Approach', teaser: 'A more polished framing of insight, clarity, and efficiency.', tag: 'Overview' },
+      { n: 20, title: 'The Value-First Approach', teaser: 'A page about audience needs, market opportunities, and creative vision.', tag: 'Framework' },
+      { n: 21, title: 'Reimagine Your Creative Process', teaser: 'A reflection on the hidden cost of bad decisions and misaligned effort.', tag: 'Problem' },
+      { n: 22, title: 'Optimizing Social Media', teaser: 'Why social output without clear objectives often produces random results.', tag: 'Distribution' },
+      { n: 23, title: 'Value Over Output', teaser: 'A page that contrasts endless creation with meaningful engagement and impact.', tag: 'Critique' },
+      { n: 24, title: 'The Historical Context', teaser: 'How the bottleneck shifted from execution scarcity to judgment scarcity.', tag: 'Perspective' },
+      { n: 25, title: 'Evaluating Core Concepts', teaser: 'Ambiguity, polarity, and value as a way to assess ideas before building.', tag: 'Evaluation' },
+      { n: 26, title: 'Value Before Distribution', teaser: 'A strong page on choosing platforms only after the value layer is defined.', tag: 'Distribution' },
+      { n: 27, title: 'Not Replacing Creativity', teaser: 'A clarifying page about what Opportunity Explorer is not.', tag: 'Positioning' },
+      { n: 28, title: 'Focus on Sustainable Value', teaser: 'Long-term thinking, timeless principles, and informed choices over quick wins.', tag: 'Long-Term' },
+      { n: 29, title: 'Key Features', teaser: 'A feature-oriented entry point for people who want to know what the product actually does.', tag: 'Product' },
+      { n: 30, title: 'Rethinking Creator Tools for Real Value', teaser: 'A manifesto-style critique of feature bloat, poor onboarding, and shallow metrics.', tag: 'Manifesto' },
+      { n: 31, title: 'The Optimization Illusion', teaser: 'A more editorial page about why doing everything right can still feel random.', tag: 'Essay' },
+      { n: 32, title: 'Software Implies Desire', teaser: 'A provocative idea: tools shape user behavior more than users realize.', tag: 'Big Idea' },
+      { n: 33, title: 'The Shift', teaser: 'A concise explanation of why more output is no longer the answer.', tag: 'Perspective' },
+      { n: 34, title: 'Common Issues', teaser: 'A page on feature overload, fragmentation, and the limits of one-size-fits-all tools.', tag: 'Critique' },
+      { n: 35, title: 'Evaluate Before Creating', teaser: 'A practical call to assess scope, impact, and manageability first.', tag: 'Evaluation' },
+      { n: 36, title: 'Value Before Distribution, Revisited', teaser: 'Platform-by-platform thinking framed around value creation rather than publishing pressure.', tag: 'Distribution' },
+      { n: 37, title: 'The Promise and Peril of Creator Tools', teaser: 'A broader reflection on metrics, AI generation, and shallow amplification.', tag: 'Essay' },
+      { n: 38, title: 'Opportunity Explorer Unveiled', teaser: 'A high-level positioning page about what this product is and what it is not.', tag: 'Positioning' },
+      { n: 39, title: 'Deep Dive', teaser: 'Use this page if you want to keep exploring the philosophy in more detail.', tag: 'Extended Read' },
+      { n: 40, title: 'Final Pass', teaser: 'A final destination for visitors who want the last word on the value-first thesis.', tag: 'Wrap-Up' }
+    ];
+    const groups = [
+      { title: 'Start with the core idea', description: 'These pages are the fastest way to understand the thesis behind Opportunity Explorer.', pages: [1,2,4,7,10,19] },
+      { title: 'Explore the framework', description: 'These pages turn the philosophy into a repeatable way of thinking and choosing.', pages: [5,6,12,17,18,25,35] },
+      { title: 'Rethink creator tools', description: 'These pages are more editorial and persuasive, ideal for visitors who want the deeper argument.', pages: [3,16,23,24,30,31,32,34,37] },
+      { title: 'Choose where value lives', description: 'These pages focus on platforms, distribution, and when each channel actually makes sense.', pages: [22,26,36] },
+      { title: 'See the product positioning', description: 'These pages are strongest for people asking what the product actually is, does, and does not do.', pages: [27,28,29,38,39,40] }
+    ];
+    const routes = [
+      { eyebrow: 'Fastest start', title: 'Pages 1 → 4 → 10', text: 'Use this path if someone needs the main problem, the framing, and the reason Opportunity Explorer exists.' },
+      { eyebrow: 'Best product path', title: 'Pages 5 → 12 → 29 → 38', text: 'Use this path if you want the clearest explanation of the framework, the process, and the product positioning.' },
+      { eyebrow: 'Best manifesto path', title: 'Pages 16 → 23 → 30 → 37', text: 'Use this path if you want the sharper critique of creator tools, AI content, metrics, and misaligned incentives.' }
+    ];
+    const getUrl = (n) => n === 1 ? base : `${base}/page-${n}`;
+    const getPage = (n) => pages.find(p => p.n === n);
+    document.getElementById('openMain').href = base;
+
+    const makeCard = (page) => {
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = getUrl(page.n);
+      a.target = '_blank';
+      a.rel = 'noreferrer';
+      a.innerHTML = `
+        <div>
+          <div class="meta">
+            <div class="page-no">Page ${page.n}</div>
+            <div class="tag">${page.tag}</div>
+          </div>
+          <h4>${page.title}</h4>
+          <p>${page.teaser}</p>
+        </div>
+        <div class="open">Open this page →</div>`;
+      return a;
+    };
+
+    const groupContainer = document.getElementById('groupContainer');
+    groups.forEach(group => {
+      const box = document.createElement('div');
+      box.className = 'group';
+      box.innerHTML = `<h3 style="font-size:clamp(28px,3.2vw,42px);line-height:1.05;letter-spacing:-.03em">${group.title}</h3><p class="desc">${group.description}</p>`;
+      const cards = document.createElement('div');
+      cards.className = 'cards';
+      group.pages.map(getPage).forEach(page => cards.appendChild(makeCard(page)));
+      box.appendChild(cards);
+      groupContainer.appendChild(box);
+    });
+
+    const routeContainer = document.getElementById('routeContainer');
+    routes.forEach(route => {
+      const div = document.createElement('div');
+      div.className = 'route';
+      div.innerHTML = `<div class="eyebrow">${route.eyebrow}</div><h3>${route.title}</h3><p>${route.text}</p>`;
+      routeContainer.appendChild(div);
+    });
+
+    const libraryContainer = document.getElementById('libraryContainer');
+    pages.forEach(page => libraryContainer.appendChild(makeCard(page)));
+  </script>
+</body>
+</html>
