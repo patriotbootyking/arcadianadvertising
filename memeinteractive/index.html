@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Video Explosion - Enhanced</title>
+  <style>
+    html, body { margin: 0; overflow: hidden; background: black; }
+    #bgCanvas, #mainCanvas { position: absolute; top:0; left:0; }
+    #controls {
+      position: absolute; top:10px; left:10px; z-index:10;
+      background:rgba(0,0,0,0.6); padding:10px; color:white;
+      border-radius:5px; font-family:sans-serif;
+    }
+    input[type=range] { width:150px; }
+  </style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+<video id="bgVideo" src="background.mp4" autoplay loop muted playsinline style="display:none"></video>
+<video id="video" src="video.mp4" autoplay loop muted playsinline style="display:none"></video>
+<canvas id="mainCanvas"></canvas>
+<audio id="popSound" src="pop.mp3"></audio>
+
+<div id="controls">
+  <button onclick="playVideo()">Play</button>
+  <button onclick="stopVideo()">Stop</button>
+  <button onclick="rewindVideo()">Rewind</button><br><br>
+  <label>Radius: <span id="radiusLabel">60</span>px</label><br>
+  <input type="range" id="radiusSlider" min="20" max="200" value="60" />
+</div>
+
+<script>
+const bgCanvas = document.getElementById('bgCanvas'), bgCtx = bgCanvas.getContext('2d');
+const mainCanvas = document.getElementById('mainCanvas'), ctx = mainCanvas.getContext('2d');
+const video = document.getElementById('video');
+const bgVideo = document.getElementById('bgVideo');
+const pop = document.getElementById('popSound');
+const radiusSlider = document.getElementById('radiusSlider');
+const radiusLabel = document.getElementById('radiusLabel');
+
+let TILE = 20, tiles = [], offCanvas, offCtx;
+let now = () => performance.now();
+
+radiusSlider.oninput = () => radiusLabel.textContent = radiusSlider.value;
+
+function setup() {
+  const w = offCanvas.width = mainCanvas.width = bgCanvas.width = video.videoWidth;
+  const h = offCanvas.height = mainCanvas.height = bgCanvas.height = video.videoHeight;
+
+  tiles = [];
+  for(let y = 0; y < h; y += TILE)
+    for(let x = 0; x < w; x += TILE) tiles.push({
+      ox:x, oy:y, x,y, vx:0, vy:0, exploded:false, healing:false, explodeTime:0, healStart:0
+    });
+
+  requestAnimationFrame(loop);
+}
+
+function init() {
+  offCanvas = document.createElement('canvas');
+  offCtx = offCanvas.getContext('2d');
+  video.addEventListener('loadeddata', setup);
+  bgVideo.addEventListener('loadeddata', setup);
+}
+init();
+
+mainCanvas.onclick = e => {
+  const rect = mainCanvas.getBoundingClientRect();
+  const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
+  const rad = +radiusSlider.value;
+  pop.currentTime = 0; pop.play();
+  const time = now();
+  tiles.forEach(t => {
+    const d = Math.hypot(t.ox - cx, t.oy - cy);
+    if(d < rad && !t.exploded) {
+      const a = Math.atan2(t.oy - cy, t.ox - cx);
+      const force = (rad - d)/rad * 20;
+      t.vx = Math.cos(a)*force;
+      t.vy = Math.sin(a)*force;
+      t.exploded = true;
+      t.healing = false;
+      t.explodeTime = time;
+    }
+  });
+};
+
+function playVideo() {
+  video.play();
+  bgVideo.play();
+}
+
+function stopVideo() {
+  video.pause();
+  bgVideo.pause();
+}
+
+function rewindVideo() {
+  video.currentTime = bgVideo.currentTime = 0;
+  playVideo();
+  tiles.forEach(t => {
+    t.x = t.ox; t.y = t.oy; t.vx = t.vy = 0;
+    t.exploded = false; t.healing = false;
+  });
+}
+
+function drawBackgroundVideoProperly(ctx, video, canvas) {
+  const vidAspect = video.videoWidth / video.videoHeight;
+  const canvasAspect = canvas.width / canvas.height;
+  let drawW = canvas.width, drawH = canvas.height;
+  let offsetX = 0, offsetY = 0;
+
+  if (vidAspect > canvasAspect) {
+    // wider video
+    drawW = canvas.height * vidAspect;
+    offsetX = (canvas.width - drawW) / 2;
+  } else {
+    // taller video
+    drawH = canvas.width / vidAspect;
+    offsetY = (canvas.height - drawH) / 2;
+  }
+
+  ctx.drawImage(video, offsetX, offsetY, drawW, drawH);
+}
+
+function loop() {
+  // Draw background video with aspect-correct sizing
+  drawBackgroundVideoProperly(bgCtx, bgVideo, bgCanvas);
+
+  // Draw frame to offscreen canvas
+  offCtx.drawImage(video, 0, 0, offCanvas.width, offCanvas.height);
+  ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+
+  const tnow = now();
+  tiles.forEach(t => {
+    if (t.exploded) {
+      const dt = (tnow - t.explodeTime)/1000;
+      if (dt > 10 && !t.healing) {
+        t.healing = true;
+        t.healStart = tnow;
+      }
+
+      if (!t.healing) {
+        t.vy += 0.5;
+        t.x += t.vx;
+        t.y += t.vy;
+      }
+    }
+
+    if (t.healing) {
+      const p = Math.min(1, (tnow - t.healStart)/1500);
+      t.x += (t.ox - t.x) * 0.1;
+      t.y += (t.oy - t.y) * 0.1;
+
+      if (p >= 1 || Math.hypot(t.x - t.ox, t.y - t.oy) < 1) {
+        t.x = t.ox; t.y = t.oy;
+        t.vx = t.vy = 0;
+        t.exploded = false;
+        t.healing = false;
+      }
+    }
+
+    ctx.drawImage(offCanvas, t.ox, t.oy, TILE, TILE, t.x, t.y, TILE, TILE);
+  });
+
+  requestAnimationFrame(loop);
+}
+</script>
+
+</body>
+</html>
