@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tutorial Studio</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b1020;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px 1fr 320px;
+      gap: 20px;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      background: #121a2b;
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    h1 { font-size: 48px; margin: 0; }
+    h2 { font-size: 30px; }
+    p, li { font-size: 24px; line-height: 1.4; }
+
+    .active {
+      color: #4da3ff;
+      font-weight: bold;
+    }
+
+    .timer {
+      margin-top: 40px;
+      background: #1d2942;
+      padding: 24px;
+      border-radius: 16px;
+      width: 240px;
+    }
+
+    .timer h1 {
+      font-size: 56px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="card">
+      <h2>Tutorial Flow</h2>
+      <p>1. Intro</p>
+      <p>2. Open App</p>
+      <p class="active">3. Show Main Feature</p>
+      <p>4. Walkthrough</p>
+      <p>5. Summary</p>
+    </div>
+
+    <div class="card">
+      <h1>Step 3 of 5</h1>
+      <h2>Show the Main Feature</h2>
+
+      <h2>AI Tips</h2>
+      <ul>
+        <li>Explain why this feature matters</li>
+        <li>Move slowly through each button</li>
+        <li>Pause before changing screens</li>
+      </ul>
+
+      <div class="timer">
+        <h2>Timer</h2>
+        <h1 id="timer">00:00</h1>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Checklist</h2>
+      <p>☑ Script Ready</p>
+      <p>☑ Mic Connected</p>
+      <p>☐ Start Recording</p>
+
+      <h2>Notes</h2>
+      <p>Mention where users can find this feature.</p>
+    </div>
+  </div>
+
+  <script>
+    let seconds = 0;
+
+    setInterval(() => {
+      seconds++;
+      const mins = String(Math.floor(seconds / 60)).padStart(2, "0");
+      const secs = String(seconds % 60).padStart(2, "0");
+      document.getElementById("timer").textContent = `${mins}:${secs}`;
+    }, 1000);
+  </script>
+</body>
+</html>
